@@ -3,203 +3,551 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Indian Travel Agency | Hajj & Umrah Services</title>
 
 <style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f1e8;color:#222}
-.container{width:100%;max-width:700px;margin:auto;padding:15px}
-nav{background:#0b3d2e;padding:12px 5px;border-radius:14px;margin-bottom:20px;text-align:center}
-nav a{color:white;text-decoration:none;display:inline-block;padding:7px 6px;font-size:14px;font-weight:bold}
-.logo{display:block;width:100%;max-width:600px;margin:auto;border-radius:16px}
-h1{text-align:center;color:#0b3d2e;font-size:32px;margin:18px 0 8px}
-h2{text-align:center;color:#b8860b;font-size:26px}
-h3{color:#0b3d2e}
-.welcome{text-align:center;font-size:18px;line-height:1.7;font-weight:bold}
-button{border:none;border-radius:10px;padding:13px 17px;margin:5px;font-size:16px;font-weight:bold;color:white;background:#0b3d2e;cursor:pointer}
-.gold{background:#b8860b}
-.whatsapp{background:#168c3a}
-.map{background:#b8860b}
-.youtube{background:#cc0000}
-.instagram{background:#833ab4}
-a{text-decoration:none}
-.card{background:white;margin:18px 0;padding:20px;border-radius:16px;box-shadow:0 4px 14px rgba(0,0,0,.15);text-align:center}
-.card p{font-size:18px;line-height:1.5}
-.name{font-size:21px!important;font-weight:bold;color:#0b3d2e}
-.services{text-align:left;font-size:17px;line-height:1.8}
-.contact-box{background:#f8f7f2;margin:10px 0;padding:12px;border-radius:12px;border:1px solid #ddd;text-align:center}
-.contact-box strong{display:block;color:#0b3d2e;font-size:18px;margin-bottom:5px}
-.small-btn{padding:10px 14px;font-size:14px}
-.office-photo{display:block;width:100%;margin:15px auto;border-radius:16px;box-shadow:0 5px 18px rgba(0,0,0,.25)}
-.footer{background:#0b3d2e;color:white;text-align:center;padding:25px 15px;margin-top:25px;border-radius:16px}
-.footer h2{color:white}
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f1e8;
+    color:#222;
+}
+
+.container{
+    width:100%;
+    max-width:720px;
+    margin:auto;
+    padding:15px;
+}
+
+/* NAVIGATION */
+nav{
+    background:#073d2e;
+    padding:12px 5px;
+    border-radius:15px;
+    margin-bottom:18px;
+    text-align:center;
+    position:sticky;
+    top:5px;
+    z-index:100;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    display:inline-block;
+    padding:8px 7px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* LOGO */
+.logo{
+    display:block;
+    width:100%;
+    max-width:650px;
+    margin:auto;
+    border-radius:18px;
+    box-shadow:0 5px 20px rgba(0,0,0,.25);
+}
+
+/* HEADINGS */
+h1{
+    text-align:center;
+    color:#073d2e;
+    font-size:34px;
+    margin:20px 0 8px;
+}
+
+.main-title{
+    text-align:center;
+    color:#b8860b;
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+h2{
+    text-align:center;
+    color:#b8860b;
+    font-size:28px;
+}
+
+h3{
+    color:#073d2e;
+    text-align:center;
+}
+
+/* WELCOME */
+.welcome{
+    text-align:center;
+    font-size:18px;
+    line-height:1.7;
+    font-weight:bold;
+}
+
+/* BUTTONS */
+button{
+    border:none;
+    border-radius:12px;
+    padding:14px 18px;
+    margin:5px;
+    font-size:16px;
+    font-weight:bold;
+    color:white;
+    cursor:pointer;
+}
+
+.green{
+    background:#188b3d;
+}
+
+.gold{
+    background:#b8860b;
+}
+
+.whatsapp{
+    background:#168c3a;
+}
+
+.map{
+    background:#b8860b;
+}
+
+.youtube{
+    background:#cc0000;
+}
+
+.instagram{
+    background:#833ab4;
+}
+
+.button{
+    display:block;
+    text-align:center;
+    text-decoration:none;
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    margin:8px 0;
+    font-size:17px;
+    font-weight:bold;
+}
+
+/* CARDS */
+.card{
+    background:white;
+    margin:22px 0;
+    padding:22px;
+    border-radius:20px;
+    box-shadow:0 5px 18px rgba(0,0,0,.14);
+}
+
+.card p{
+    font-size:18px;
+    line-height:1.6;
+}
+
+.services{
+    text-align:left;
+    font-size:18px;
+    line-height:2.2;
+    margin-top:15px;
+}
+
+.services div{
+    margin:8px 0;
+}
+
+/* CONTACT */
+.contact-card{
+    text-align:center;
+}
+
+.name{
+    font-size:23px !important;
+    font-weight:bold;
+    color:#073d2e;
+}
+
+.phone{
+    font-size:20px;
+    margin:12px 0;
+}
+
+/* OFFICE PHOTO */
+.office-photo{
+    display:block;
+    width:100%;
+    max-width:680px;
+    margin:15px auto;
+    border-radius:18px;
+    box-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+
+/* FOOTER */
+.footer{
+    background:#073d2e;
+    color:white;
+    text-align:center;
+    padding:28px 15px;
+    margin-top:25px;
+    border-radius:18px;
+}
+
+.footer h2{
+    color:#d4af37;
+}
+
+.footer p{
+    font-size:16px;
+    line-height:1.6;
+}
+
+/* MOBILE */
 @media(max-width:500px){
-h1{font-size:27px}
-h2{font-size:23px}
-nav a{font-size:13px;padding:6px 4px}
-button{width:90%;margin:6px auto}
-.small-btn{width:45%;display:inline-block}
+    h1{
+        font-size:31px;
+    }
+
+    .main-title{
+        font-size:25px;
+    }
+
+    h2{
+        font-size:25px;
+    }
+
+    .services{
+        font-size:17px;
+    }
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
 
+<!-- NAVIGATION -->
 <nav>
 <a href="#home">🏠 Home</a>
 <a href="#hajj">🕌 Hajj</a>
 <a href="#umrah">🌙 Umrah</a>
 <a href="#contact">📞 Contact</a>
-<a href="#office">📍 Office</a>
+<a href="#office">🏢 Office</a>
 </nav>
 
+<!-- HOME -->
 <section id="home">
-<img class="logo" src="https://i.postimg.cc/hjPJmqMt/file-00000000d9c081f4bc30c5d9c3ac3ac2.jpg" alt="Indian Travel Agency Logo">
+
+<img
+class="logo"
+src="https://i.postimg.cc/hjPJmqMt/file-00000000d9c081f4bc30c5d9c3ac3ac2.jpg"
+alt="Indian Travel Agency Logo">
 
 <h1>🇮🇳 Indian Travel Agency 🇮🇳</h1>
-<h2>Hajj & Umrah Services</h2>
 
-<p class="welcome">
-Welcome to Indian Travel Agency.<br>
-We are ready to serve you in Hajj and Umrah Services.<br>
-How can we help you?<br>
+<div class="main-title">
+Hajj & Umrah Services
+</div>
+
+<div class="welcome">
+
+Welcome to Indian Travel Agency.
+
+<br>
+
+We are ready to serve you in Hajj and Umrah Services.
+
+<br>
+
+How can we help you?
+
+<br><br>
+
 Thank you for visiting Indian Travel Agency. 🇮🇳
+
+</div>
+
+<a class="button green" href="#hajj">
+🕌 HAJJ SERVICES
+</a>
+
+<a class="button gold" href="#umrah">
+🌙 UMRAH SERVICES
+</a>
+
+</section>
+
+
+<!-- HAJJ -->
+<section id="hajj" class="card">
+
+<h2>🕌 Hajj Services</h2>
+
+<p style="text-align:center;">
+Complete Hajj assistance and guidance for pilgrims.
 </p>
 
-<a href="#hajj"><button class="whatsapp">🕌 HAJJ SERVICES</button></a>
-<a href="#umrah"><button class="gold">🌙 UMRAH SERVICES</button></a>
-</section>
-
-
-<!-- HAJJ SERVICES -->
-<section id="hajj">
-<div class="card">
-<h2>🕌 Hajj Services</h2>
-<p>Complete Hajj assistance and guidance for pilgrims.</p>
-
 <div class="services">
-<p>✅ Hajj Application Guidance</p>
-<p>✅ Pilgrim Training & Guidance</p>
-<p>✅ Medical & Documentation Guidance</p>
-<p>✅ Travel Assistance</p>
-<p>✅ Hajj Related Updates</p>
+
+<div>✅ Hajj Application Guidance</div>
+
+<div>✅ Pilgrim Training & Guidance</div>
+
+<div>✅ Medical & Documentation Guidance</div>
+
+<div>✅ Travel Assistance</div>
+
+<div>✅ Hajj Related Updates</div>
+
 </div>
 
-<a href="#contact">
-<button class="whatsapp">🕌 Hajj Services — Contact Us</button>
+<a class="button green" href="#contact">
+🕌 Hajj Services — Contact Us
 </a>
 
-</div>
 </section>
 
 
-<!-- UMRAH SERVICES -->
-<section id="umrah">
-<div class="card">
+<!-- UMRAH -->
+<section id="umrah" class="card">
+
 <h2>🌙 Umrah Services</h2>
-<p>Complete Umrah assistance and guidance.</p>
+
+<p style="text-align:center;">
+Complete Umrah assistance and guidance.
+</p>
 
 <div class="services">
-<p>✅ Umrah Visa Assistance</p>
-<p>✅ Hotel & Travel Assistance</p>
-<p>✅ Umrah Guidance</p>
-<p>✅ Makkah & Madinah Assistance</p>
-<p>✅ Ziyarat Guidance</p>
+
+<div>✅ Umrah Visa Assistance</div>
+
+<div>✅ Hotel & Travel Assistance</div>
+
+<div>✅ Umrah Guidance</div>
+
+<div>✅ Makkah & Madinah Assistance</div>
+
+<div>✅ Ziyarat Guidance</div>
+
 </div>
 
-<a href="#contact">
-<button class="gold">🌙 Umrah Services — Contact Us</button>
+<a class="button gold" href="#contact">
+🌙 Umrah Services — Contact Us
 </a>
 
-</div>
 </section>
 
 
 <!-- CONTACT -->
 <section id="contact">
-<h2>📞 Contact Us</h2>
 
-<div class="card">
-<p class="name">Hafiz Rahmatulla Sahib</p>
-<p>📱 +91 98865 36784</p>
-<a href="tel:+919886536784"><button>📞 Call</button></a>
-<a href="https://wa.me/919886536784" target="_blank"><button class="whatsapp">💬 WhatsApp</button></a>
+<h2>📞 Hajj & Umrah Services</h2>
+
+<!-- 1 -->
+<div class="card contact-card">
+
+<p class="name">
+Hafiz Rahmatulla Sahib
+</p>
+
+<p class="phone">
+📱 +91 98865 36784
+</p>
+
+<a class="button green" href="tel:+919886536784">
+📞 Call
+</a>
+
+<a class="button whatsapp"
+href="https://wa.me/919886536784?text=السلام%20علیکم%20ورحمۃ%20اللہ%20وبرکاتہ%2C%20ہمیں%20آپ%20سے%20حج%20اور%20عمرہ%20کے%20متعلق%20معلومات%20حاصل%20کرنا%20ہے۔">
+💬 WhatsApp
+</a>
+
 </div>
 
-<div class="card">
-<p class="name">Syed Ajmal Mysorie</p>
-<p>📱 +91 98457 91016</p>
-<a href="tel:+919845791016"><button>📞 Call</button></a>
-<a href="https://wa.me/919845791016" target="_blank"><button class="whatsapp">💬 WhatsApp</button></a>
+
+<!-- 2 -->
+<div class="card contact-card">
+
+<p class="name">
+Syed Ajmal Mysorie
+</p>
+
+<p class="phone">
+📱 +91 98457 91016
+</p>
+
+<a class="button green" href="tel:+919845791016">
+📞 Call
+</a>
+
+<a class="button whatsapp"
+href="https://wa.me/919845791016?text=السلام%20علیکم%20ورحمۃ%20اللہ%20وبرکاتہ%2C%20ہمیں%20آپ%20سے%20حج%20اور%20عمرہ%20کے%20متعلق%20معلومات%20حاصل%20کرنا%20ہے۔">
+💬 WhatsApp
+</a>
+
 </div>
 
-<div class="card">
-<p class="name">Shabbir Mohammed</p>
-<p>📱 +91 94487 66503</p>
-<a href="tel:+919448766503"><button>📞 Call</button></a>
-<a href="https://wa.me/919448766503" target="_blank"><button class="whatsapp">💬 WhatsApp</button></a>
+
+<!-- 3 -->
+<div class="card contact-card">
+
+<p class="name">
+Shabbir Mohammed
+</p>
+
+<p class="phone">
+📱 +91 94487 66503
+</p>
+
+<a class="button green" href="tel:+919448766503">
+📞 Call
+</a>
+
+<a class="button whatsapp"
+href="https://wa.me/919448766503?text=السلام%20علیکم%20ورحمۃ%20اللہ%20وبرکاتہ%2C%20ہمیں%20آپ%20سے%20حج%20اور%20عمرہ%20کے%20متعلق%20معلومات%20حاصل%20کرنا%20ہے۔">
+💬 WhatsApp
+</a>
+
 </div>
 
-<div class="card">
-<p class="name">Syed Fasiulla Mysorie</p>
-<p>📱 +91 96637 42553</p>
-<a href="tel:+919663742553"><button>📞 Call</button></a>
-<a href="https://wa.me/919663742553" target="_blank"><button class="whatsapp">💬 WhatsApp</button></a>
+
+<!-- 4 -->
+<div class="card contact-card">
+
+<p class="name">
+Syed Fasiulla Mysorie
+</p>
+
+<p class="phone">
+📱 +91 96637 42553
+</p>
+
+<a class="button green" href="tel:+919663742553">
+📞 Call
+</a>
+
+<a class="button whatsapp"
+href="https://wa.me/919663742553?text=السلام%20علیکم%20ورحمۃ%20اللہ%20وبرکاتہ%2C%20ہمیں%20آپ%20سے%20حج%20اور%20عمرہ%20کے%20متعلق%20معلومات%20حاصل%20کرنا%20ہے۔">
+💬 WhatsApp
+</a>
+
 </div>
 
-<div class="card">
-<p class="name">Syed Wasiulla Mysorie</p>
-<p>📱 +91 86184 19286</p>
-<a href="tel:+918618419286"><button>📞 Call</button></a>
-<a href="https://wa.me/918618419286" target="_blank"><button class="whatsapp">💬 WhatsApp</button></a>
+
+<!-- 5 -->
+<div class="card contact-card">
+
+<p class="name">
+Syed Wasiulla Mysorie
+</p>
+
+<p class="phone">
+📱 +91 86184 19286
+</p>
+
+<a class="button green" href="tel:+918618419286">
+📞 Call
+</a>
+
+<a class="button whatsapp"
+href="https://wa.me/918618419286?text=السلام%20علیکم%20ورحمۃ%20اللہ%20وبرکاتہ%2C%20ہمیں%20آپ%20سے%20حج%20اور%20عمرہ%20کے%20متعلق%20معلومات%20حاصل%20کرنا%20ہے۔">
+💬 WhatsApp
+</a>
+
 </div>
+
 </section>
 
 
 <!-- OFFICE -->
-<section id="office">
+<section id="office" class="card">
+
 <h2>🏢 Our Office</h2>
 
-<div class="card">
-<h3>Indian Travel Agency</h3>
-<p><strong>Hajj & Umrah Services</strong></p>
-<p>N.T. Road, Near Madni Masjid</p>
-<p>Shivamogga, Karnataka, India 🇮🇳</p>
+<img
+class="office-photo"
+src="https://i.postimg.cc/GpHckhGR/file-00000000e8b48246922098c27527e1da.png"
+alt="Indian Travel Agency Office">
 
-<a href="https://maps.app.goo.gl/raFiN9M7vB1QY3YNA" target="_blank">
-<button class="map">📍 Open Google Maps</button>
+<h3>
+Indian Travel Agency Hajj & Umrah Services
+</h3>
+
+<p style="text-align:center;">
+📍 N.T. Road, Near Madni Masjid<br>
+Shivamogga, Karnataka 577201<br>
+India 🇮🇳
+</p>
+
+<a
+class="button map"
+href="https://maps.app.goo.gl/raFiN9M7vB1QY3YNA"
+target="_blank">
+📍 Open Google Maps
 </a>
-</div>
 
-<img class="office-photo" src="https://i.postimg.cc/GpHckhGR/file-00000000e8b48246922098c27527e1da.png" alt="Indian Travel Agency Office">
 </section>
 
 
 <!-- SOCIAL MEDIA -->
-<div class="card">
-<h2>🌐 Follow Us</h2>
+<section class="card">
 
-<a href="https://www.youtube.com/@Indiantravelagency_official" target="_blank">
-<button class="youtube">▶️ YouTube</button>
+<h2>🌐 Connect With Us</h2>
+
+<a
+class="button youtube"
+href="https://www.youtube.com/@Indiantravelagency_official"
+target="_blank">
+▶️ YouTube
 </a>
 
-<a href="https://www.instagram.com/syed_mysorie/" target="_blank">
-<button class="instagram">📷 Instagram</button>
+<a
+class="button instagram"
+href="https://www.instagram.com/syed_mysorie/"
+target="_blank">
+📸 Instagram
 </a>
-</div>
+
+</section>
 
 
 <!-- FOOTER -->
 <div class="footer">
+
 <h2>Indian Travel Agency</h2>
-<p>Hajj & Umrah Services</p>
-<p>Shivamogga, Karnataka, India 🇮🇳</p>
-<p>✈️ Your Trusted Travel Partner</p>
-<p>© 2026 Indian Travel Agency</p>
+
+<p>
+🕌 Hajj & Umrah Services
+</p>
+
+<p>
+Shivamogga, Karnataka, India 🇮🇳
+</p>
+
+<p>
+© 2026 Indian Travel Agency
+</p>
+
+<p>
+Serving Pilgrims With Care & Guidance 🤲
+</p>
+
 </div>
 
 </div>
+
 </body>
-</html>
+  </html>
