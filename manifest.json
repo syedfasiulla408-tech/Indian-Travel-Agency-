@@ -1,0 +1,17 @@
+{
+  "name": "Indian Travel Agency - Hajj & Umrah Services",
+  "short_name": "Indian Travel Agency",
+  "description": "Indian Travel Agency Hajj & Umrah Services, Shivamogga, Karnataka",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f1e8",
+  "theme_color": "#073d2e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/hjPJmqMt/file-00000000d9c081f4bc30c5d9c3ac3ac2.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
