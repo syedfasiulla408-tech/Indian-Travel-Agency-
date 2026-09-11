@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Panel | Indian Travel Agency</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f4f1e8;
+ color:#222;
+}
+.container{
+ max-width:700px;
+ margin:auto;
+ padding:15px;
+}
+.header{
+ background:#073d2e;
+ color:white;
+ text-align:center;
+ padding:25px 15px;
+ border-radius:18px;
+ margin-bottom:20px;
+}
+.header h1{margin:0 0 8px}
+.card{
+ background:white;
+ padding:20px;
+ margin-bottom:20px;
+ border-radius:18px;
+ box-shadow:0 5px 18px rgba(0,0,0,.15);
+}
+h2{
+ color:#073d2e;
+ text-align:center;
+}
+label{
+ display:block;
+ font-weight:bold;
+ margin:15px 0 7px;
+}
+input,textarea{
+ width:100%;
+ padding:13px;
+ border:1px solid #ccc;
+ border-radius:10px;
+ font-size:16px;
+}
+textarea{
+ min-height:140px;
+ resize:vertical;
+}
+button{
+ border:0;
+ border-radius:10px;
+ padding:13px 18px;
+ margin-top:12px;
+ font-size:16px;
+ font-weight:bold;
+ cursor:pointer;
+}
+.login-btn,.publish-btn{
+ width:100%;
+ background:#073d2e;
+ color:white;
+}
+.logout-btn{
+ background:#b8860b;
+ color:white;
+}
+.delete-btn{
+ background:#c62828;
+ color:white;
+}
+.message{
+ text-align:center;
+ font-weight:bold;
+ margin-top:15px;
+}
+.hidden{display:none}
+.post{
+ background:#f4f1e8;
+ padding:18px;
+ margin-top:15px;
+ border-radius:14px;
+ border-left:5px solid #b8860b;
+}
+.post h3{color:#073d2e}
+.post img{
+ width:100%;
+ max-height:300px;
+ object-fit:cover;
+ border-radius:10px;
+ margin-top:10px;
+}
+.home-btn{
+ display:block;
+ text-align:center;
+ background:#073d2e;
+ color:white;
+ text-decoration:none;
+ padding:13px;
+ border-radius:10px;
+ margin-top:15px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<h1>🔐 Admin Panel</h1>
+<p>Indian Travel Agency</p>
+<p>Hajj & Umrah Services</p>
+</div>
+
+<!-- LOGIN -->
+
+<div id="loginBox" class="card">
+
+<h2>Admin Login</h2>
+
+<label>Email</label>
+<input type="email" id="email" placeholder="Admin Email">
+
+<label>Password</label>
+<input type="password" id="password" placeholder="Password">
+
+<button class="login-btn" onclick="login()">
+🔐 Login
+</button>
+
+<div id="loginMessage" class="message"></div>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminArea" class="hidden">
+
+<div class="card">
+
+<h2>📝 نئی پوسٹ</h2>
+
+<label>Post Title</label>
+
+<input
+type="text"
+id="title"
+placeholder="مثلاً: حج 2027 تازہ ترین اطلاع"
+>
+
+<label>Post Content</label>
+
+<textarea
+id="content"
+placeholder="اپنی پوسٹ یہاں لکھیں..."
+></textarea>
+
+<label>Image URL</label>
+
+<input
+type="url"
+id="image_url"
+placeholder="https://example.com/image.jpg"
+>
+
+<button class="publish-btn" onclick="publishPost()">
+📢 Publish Post
+</button>
+
+<div id="postMessage" class="message"></div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📢 Published Posts</h2>
+
+<div id="posts">
+Loading...
+</div>
+
+</div>
+
+
+<button class="logout-btn" onclick="logout()">
+🚪 Logout
+</button>
+
+<a class="home-btn" href="./index.html">
+🏠 Back to Website
+</a>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* SUPABASE */
+
+const SUPABASE_URL =
+"https://dahhcsgzgvejshrkbbmi.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_0HLoLjVGP1HQGmpbMG0ApA_8m2hyEuR";
+
+const db =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_KEY
+);
+
+
+/* LOGIN */
+
+async function login(){
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+const message =
+document.getElementById("loginMessage");
+
+if(!email || !password){
+
+message.innerText =
+"براہ کرم Email اور Password لکھیں۔";
+
+return;
+}
+
+message.innerText =
+"Login ہو رہا ہے...";
+
+const {error} =
+await db.auth.signInWithPassword({
+email:email,
+password:password
+});
+
+if(error){
+
+message.innerText =
+"❌ Login ناکام: " + error.message;
+
+return;
+}
+
+message.innerText =
+"✅ Login کامیاب";
+
+showAdmin();
+
+}
+
+
+/* CHECK LOGIN */
+
+async function checkUser(){
+
+const {data} =
+await db.auth.getSession();
+
+if(data.session){
+
+showAdmin();
+
+}
+
+}
+
+
+/* SHOW ADMIN */
+
+function showAdmin(){
+
+document
+.getElementById("loginBox")
+.classList.add("hidden");
+
+document
+.getElementById("adminArea")
+.classList.remove("hidden");
+
+loadPosts();
+
+}
+
+
+/* LOGOUT */
+
+async function logout(){
+
+await db.auth.signOut();
+
+location.reload();
+
+}
+
+
+/* PUBLISH */
+
+async function publishPost(){
+
+const title =
+document.getElementById("title").value.trim();
+
+const content =
+document.getElementById("content").value.trim();
+
+const image_url =
+document.getElementById("image_url").value.trim();
+
+const message =
+document.getElementById("postMessage");
+
+if(!title){
+
+message.innerText =
+"❌ Post Title لکھیں۔";
+
+return;
+}
+
+if(!content){
+
+message.innerText =
+"❌ Post Content لکھیں۔";
+
+return;
+}
+
+message.innerText =
+"Post Publish ہو رہی ہے...";
+
+const {error} =
+await db
+.from("posts")
+.insert({
+title:title,
+content:content,
+image_url:image_url || null,
+published:true
+});
+
+if(error){
+
+message.innerText =
+"❌ Error: " + error.message;
+
+return;
+}
+
+message.innerText =
+"✅ Post کامیابی سے Publish ہوگئی۔";
+
+document.getElementById("title").value="";
+document.getElementById("content").value="";
+document.getElementById("image_url").value="";
+
+loadPosts();
+
+}
+
+
+/* LOAD POSTS */
+
+async function loadPosts(){
+
+const box =
+document.getElementById("posts");
+
+box.innerHTML="Loading...";
+
+const {data,error} =
+await db
+.from("posts")
+.select("*")
+.order("created_at",{ascending:false});
+
+if(error){
+
+box.innerHTML =
+"❌ Posts load نہیں ہوئیں۔<br><br>" +
+error.message;
+
+return;
+}
+
+if(!data || data.length===0){
+
+box.innerHTML =
+"ابھی کوئی Post موجود نہیں۔";
+
+return;
+}
+
+box.innerHTML="";
+
+data.forEach(post=>{
+
+const div =
+document.createElement("div");
+
+div.className="post";
+
+let imageHTML="";
+
+if(post.image_url){
+
+imageHTML =
+`<img src="${escapeHTML(post.image_url)}"
+alt="Post Image">`;
+
+}
+
+div.innerHTML=`
+
+<h3>${escapeHTML(post.title)}</h3>
+
+${imageHTML}
+
+<p>${escapeHTML(post.content || "")}</p>
+
+<small>
+📅 ${new Date(post.created_at).toLocaleString()}
+</small>
+
+<br>
+
+<button
+class="delete-btn"
+onclick="deletePost(${post.id})">
+🗑️ Delete
+</button>
+
+`;
+
+box.appendChild(div);
+
+});
+
+}
+
+
+/* DELETE */
+
+async function deletePost(id){
+
+if(!confirm(
+"کیا آپ واقعی یہ Post Delete کرنا چاہتے ہیں؟"
+)){
+
+return;
+
+}
+
+const {error} =
+await db
+.from("posts")
+.delete()
+.eq("id",id);
+
+if(error){
+
+alert(
+"Delete Error: " + error.message
+);
+
+return;
+}
+
+alert("✅ Post Delete ہوگئی۔");
+
+loadPosts();
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(text){
+
+return String(text)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* START */
+
+checkUser();
+
+</script>
+
+</body>
+</html>
