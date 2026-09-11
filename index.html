@@ -13,6 +13,9 @@
 
 <meta name="theme-color" content="#073d2e">
 
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 *{
@@ -181,7 +184,7 @@ h3{
     box-shadow:0 5px 18px rgba(0,0,0,.25);
 }
 
-/* POST */
+/* POSTS */
 
 .post{
     background:#f4f1e8;
@@ -189,11 +192,27 @@ h3{
     border-radius:16px;
     margin-top:15px;
     border-left:5px solid #b8860b;
+    text-align:left;
 }
 
 .post h3{
     font-size:22px;
     margin-top:0;
+    text-align:center;
+}
+
+.post p{
+    font-size:17px;
+    line-height:1.8;
+}
+
+.post img{
+    display:block;
+    width:100%;
+    max-height:400px;
+    object-fit:cover;
+    border-radius:12px;
+    margin:12px auto;
 }
 
 .post-date{
@@ -252,6 +271,7 @@ h3{
 <body>
 
 <div class="container">
+
 
 <!-- NAVIGATION -->
 
@@ -393,23 +413,10 @@ How can we help you?
 
 <h2>📢 Latest Updates</h2>
 
-<div class="post">
+<div id="latestPosts">
 
-<h3>
-🕋 Hajj & Umrah Latest Updates
-</h3>
-
-<p>
-
-یہاں حج و عمرہ سے متعلق تازہ ترین خبریں،
-اہم اعلانات، معلومات اور پوسٹس شائع کی جائیں گی۔
-
-</p>
-
-<p class="post-date">
-
-📅 Latest Update
-
+<p style="text-align:center;">
+تازہ ترین پوسٹس لوڈ ہو رہی ہیں...
 </p>
 
 </div>
@@ -671,6 +678,139 @@ Serving Pilgrims With Care & Guidance 🤲
 </div>
 
 
+<!-- SUPABASE LATEST POSTS -->
+
+<script>
+
+const SUPABASE_URL =
+"https://dahhcsgzgvejshrkbbmi.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_0HLoLjVGP1HQGmpbMG0ApA_8m2hyEuR";
+
+const db =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+async function loadLatestPosts(){
+
+    const box =
+    document.getElementById("latestPosts");
+
+
+    const { data, error } =
+    await db
+    .from("posts")
+    .select("*")
+    .eq("published", true)
+    .order("created_at", {
+        ascending:false
+    })
+    .limit(20);
+
+
+    if(error){
+
+        box.innerHTML = `
+        <p style="text-align:center;">
+        ❌ تازہ ترین پوسٹس لوڈ نہیں ہو سکیں۔
+        </p>
+        `;
+
+        console.error(error);
+
+        return;
+    }
+
+
+    if(!data || data.length === 0){
+
+        box.innerHTML = `
+        <p style="text-align:center;">
+        ابھی کوئی نئی پوسٹ موجود نہیں۔
+        </p>
+        `;
+
+        return;
+    }
+
+
+    box.innerHTML = "";
+
+
+    data.forEach(post => {
+
+        const div =
+        document.createElement("div");
+
+        div.className = "post";
+
+
+        let imageHTML = "";
+
+
+        if(post.image_url){
+
+            imageHTML = `
+            <img
+            src="${escapeHTML(post.image_url)}"
+            alt="Post Image">
+            `;
+
+        }
+
+
+        div.innerHTML = `
+
+        <h3>
+        ${escapeHTML(post.title)}
+        </h3>
+
+        ${imageHTML}
+
+        <p>
+        ${escapeHTML(post.content || "")}
+        </p>
+
+        <p class="post-date">
+        📅 ${new Date(post.created_at).toLocaleString()}
+        </p>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+function escapeHTML(text){
+
+    return String(text)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+loadLatestPosts();
+
+</script>
+
+
 <!-- SERVICE WORKER -->
 
 <script>
@@ -682,6 +822,7 @@ if ("serviceWorker" in navigator) {
 }
 
 </script>
+
 
 </body>
 
