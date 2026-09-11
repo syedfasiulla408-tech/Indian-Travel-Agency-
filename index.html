@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +6,8 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Indian Travel Agency | Hajj & Umrah Services</title>
 
@@ -184,7 +186,7 @@ h3{
     box-shadow:0 5px 18px rgba(0,0,0,.25);
 }
 
-/* POSTS */
+/* LATEST POSTS */
 
 .post{
     background:#f4f1e8;
@@ -206,18 +208,21 @@ h3{
     line-height:1.8;
 }
 
-.post img{
+.post-image{
     display:block;
     width:100%;
-    max-height:400px;
+    max-width:650px;
+    max-height:500px;
     object-fit:cover;
-    border-radius:12px;
-    margin:12px auto;
+    margin:15px auto;
+    border-radius:14px;
+    box-shadow:0 4px 15px rgba(0,0,0,.18);
 }
 
 .post-date{
     font-size:14px !important;
     color:#777;
+    text-align:center;
 }
 
 /* FOOTER */
@@ -272,7 +277,6 @@ h3{
 
 <div class="container">
 
-
 <!-- NAVIGATION -->
 
 <nav>
@@ -313,7 +317,6 @@ Welcome to Indian Travel Agency.
 <br>
 
 We are ready to serve you with reliable
-
 Hajj and Umrah services.
 
 <br>
@@ -678,7 +681,7 @@ Serving Pilgrims With Care & Guidance 🤲
 </div>
 
 
-<!-- SUPABASE LATEST POSTS -->
+<!-- SUPABASE POSTS SCRIPT -->
 
 <script>
 
@@ -690,8 +693,8 @@ const SUPABASE_KEY =
 
 const db =
 supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
+SUPABASE_URL,
+SUPABASE_KEY
 );
 
 
@@ -699,7 +702,6 @@ async function loadLatestPosts(){
 
     const box =
     document.getElementById("latestPosts");
-
 
     const { data, error } =
     await db
@@ -720,7 +722,10 @@ async function loadLatestPosts(){
         </p>
         `;
 
-        console.error(error);
+        console.error(
+            "Supabase Error:",
+            error
+        );
 
         return;
     }
@@ -756,11 +761,20 @@ async function loadLatestPosts(){
 
             imageHTML = `
             <img
+            class="post-image"
             src="${escapeHTML(post.image_url)}"
-            alt="Post Image">
+            alt="Post Image"
+            loading="lazy">
             `;
 
         }
+
+
+        const postDate =
+        post.created_at
+        ? new Date(post.created_at)
+            .toLocaleString()
+        : "";
 
 
         div.innerHTML = `
@@ -772,11 +786,13 @@ async function loadLatestPosts(){
         ${imageHTML}
 
         <p>
-        ${escapeHTML(post.content || "")}
+        ${escapeHTML(
+            post.content || ""
+        ).replace(/\n/g,"<br>")}
         </p>
 
         <p class="post-date">
-        📅 ${new Date(post.created_at).toLocaleString()}
+        📅 ${escapeHTML(postDate)}
         </p>
 
         `;
