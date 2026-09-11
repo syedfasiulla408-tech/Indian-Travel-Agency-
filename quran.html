@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>قرآن مجید | Indian Travel Agency</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:"Noto Naskh Arabic","Amiri","Segoe UI",serif;
+  background:#f5f8f6;
+  color:#173d31;
+}
+
+header{
+  background:linear-gradient(135deg,#073d2e,#0b6b4f);
+  color:white;
+  padding:25px 15px;
+  text-align:center;
+  box-shadow:0 3px 12px rgba(0,0,0,.15);
+}
+
+header h1{
+  margin:0;
+  font-size:30px;
+}
+
+header p{
+  margin:8px 0 0;
+  font-size:16px;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:20px 14px 40px;
+}
+
+.home-btn{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  background:#073d2e;
+  color:white;
+  padding:13px;
+  border-radius:12px;
+  margin-bottom:18px;
+  font-size:17px;
+}
+
+.controls{
+  background:white;
+  padding:18px;
+  border-radius:18px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+select{
+  width:100%;
+  padding:13px;
+  border:1px solid #cbd8d2;
+  border-radius:10px;
+  font-size:16px;
+  background:white;
+}
+
+.surah-info{
+  text-align:center;
+  background:#e9f4ef;
+  padding:18px;
+  border-radius:16px;
+  margin-bottom:18px;
+}
+
+.surah-info h2{
+  margin:0 0 5px;
+  font-size:28px;
+}
+
+.surah-info p{
+  margin:5px;
+}
+
+.bismillah{
+  text-align:center;
+  font-size:28px;
+  margin:25px 0;
+  font-weight:bold;
+}
+
+.ayah{
+  background:white;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:14px;
+  box-shadow:0 2px 10px rgba(0,0,0,.06);
+}
+
+.ayah-text{
+  font-size:28px;
+  line-height:2.2;
+  text-align:right;
+}
+
+.ayah-number{
+  display:inline-flex;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#0b6b4f;
+  color:white;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  margin-right:8px;
+  vertical-align:middle;
+}
+
+.loading{
+  text-align:center;
+  padding:35px;
+  font-size:18px;
+}
+
+.error{
+  background:#fff0f0;
+  color:#a40000;
+  padding:18px;
+  border-radius:12px;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  background:#073d2e;
+  color:white;
+  padding:20px 10px;
+  margin-top:30px;
+  font-size:14px;
+}
+
+@media(max-width:600px){
+  header h1{
+    font-size:25px;
+  }
+
+  .ayah-text{
+    font-size:24px;
+    line-height:2.1;
+  }
+
+  .bismillah{
+    font-size:24px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📖 قرآن مجید</h1>
+  <p>Indian Travel Agency — Hajj & Umrah Services</p>
+</header>
+
+<div class="container">
+
+<a class="home-btn" href="./index.html">
+  🏠 واپس Home Page
+</a>
+
+<div class="controls">
+
+<label for="surahSelect">سورت منتخب کریں</label>
+
+<select id="surahSelect">
+  <option value="">سورتیں لوڈ ہو رہی ہیں...</option>
+</select>
+
+</div>
+
+<div id="quranContent">
+  <div class="loading">قرآن مجید لوڈ ہو رہا ہے... ⏳</div>
+</div>
+
+</div>
+
+<footer>
+  <div>Indian Travel Agency</div>
+  <div>Hajj & Umrah Services</div>
+  <div>Shivamogga, Karnataka, India 🇮🇳</div>
+</footer>
+
+<script>
+
+const API = "https://api.alquran.cloud/v1";
+
+const surahSelect = document.getElementById("surahSelect");
+const quranContent = document.getElementById("quranContent");
+
+
+// تمام سورتیں حاصل کریں
+async function loadSurahs(){
+
+  try{
+
+    const response = await fetch(API + "/surah");
+
+    if(!response.ok){
+      throw new Error("Network error");
+    }
+
+    const result = await response.json();
+
+    surahSelect.innerHTML =
+      '<option value="">سورت منتخب کریں</option>';
+
+    result.data.forEach(surah => {
+
+      const option = document.createElement("option");
+
+      option.value = surah.number;
+
+      option.textContent =
+        surah.number + " — " +
+        surah.name +
+        " — " +
+        surah.englishName;
+
+      surahSelect.appendChild(option);
+
+    });
+
+    // پہلی سورت خود کھولیں
+    surahSelect.value = "1";
+    loadSurah(1);
+
+  }catch(error){
+
+    quranContent.innerHTML =
+      '<div class="error">سورتوں کو لوڈ کرنے میں مسئلہ پیش آیا۔ براہ کرم دوبارہ کوشش کریں۔</div>';
+
+  }
+
+}
+
+
+// منتخب سورت کا قرآن متن حاصل کریں
+async function loadSurah(number){
+
+  if(!number) return;
+
+  quranContent.innerHTML =
+    '<div class="loading">سورت لوڈ ہو رہی ہے... ⏳</div>';
+
+  try{
+
+    const response = await fetch(
+      API + "/surah/" + number + "/quran-uthmani"
+    );
+
+    if(!response.ok){
+      throw new Error("Unable to load surah");
+    }
+
+    const result = await response.json();
+
+    const surah = result.data;
+
+    let html = "";
+
+    html += `
+      <div class="surah-info">
+        <h2>${surah.name}</h2>
+        <p>${surah.englishName}</p>
+        <p>${surah.englishNameTranslation}</p>
+        <p>
+          ${surah.numberOfAyahs} آیات —
+          ${surah.revelationType === "Meccan" ? "مکی" : "مدنی"}
+        </p>
+      </div>
+    `;
+
+    // بسم اللہ
+    if(number != 9){
+
+      html += `
+        <div class="bismillah">
+          بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ
+        </div>
+      `;
+
+    }
+
+    surah.ayahs.forEach(ayah => {
+
+      html += `
+        <div class="ayah">
+
+          <div class="ayah-text">
+
+            ${ayah.text}
+
+            <span class="ayah-number">
+              ${ayah.numberInSurah}
+            </span>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+    quranContent.innerHTML = html;
+
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
+
+  }catch(error){
+
+    quranContent.innerHTML = `
+      <div class="error">
+        اس سورت کو لوڈ کرنے میں مسئلہ پیش آیا۔
+        <br><br>
+        براہ کرم Internet connection چیک کرکے دوبارہ کوشش کریں۔
+      </div>
+    `;
+
+  }
+
+}
+
+
+// سورت تبدیل ہونے پر
+surahSelect.addEventListener("change", function(){
+
+  loadSurah(this.value);
+
+});
+
+
+// صفحہ شروع ہونے پر سورتیں لوڈ کریں
+loadSurahs();
+
+</script>
+
+</body>
+</html>
