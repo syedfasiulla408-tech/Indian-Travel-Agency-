@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Hijri & Gregorian Calendar | Indian Travel Agency</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f5f1e7;
+  color:#222;
+}
+
+header{
+  background:#073d2e;
+  color:white;
+  text-align:center;
+  padding:22px 15px;
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:8px 0 0;
+  color:#f0c75e;
+  font-size:17px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:700px;
+  margin:25px auto;
+  padding:0 15px;
+}
+
+.card{
+  background:white;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+.today{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.today h2{
+  margin:5px 0;
+  color:#073d2e;
+}
+
+.today p{
+  margin:6px 0;
+  font-size:18px;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.controls button{
+  border:0;
+  background:#073d2e;
+  color:white;
+  padding:12px 18px;
+  border-radius:12px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.month-title{
+  text-align:center;
+  color:#073d2e;
+  font-size:23px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.weekdays,
+.calendar{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:5px;
+}
+
+.weekdays div{
+  text-align:center;
+  font-weight:bold;
+  color:#073d2e;
+  padding:8px 2px;
+  font-size:13px;
+}
+
+.day{
+  min-height:70px;
+  background:#fafafa;
+  border:1px solid #eee;
+  border-radius:10px;
+  padding:7px 4px;
+  text-align:center;
+}
+
+.day .greg{
+  font-size:17px;
+  font-weight:bold;
+}
+
+.day .hijri{
+  font-size:11px;
+  margin-top:7px;
+  color:#9b7410;
+  direction:rtl;
+}
+
+.today-day{
+  border:2px solid #c89512;
+  background:#fff8df;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  text-decoration:none;
+  background:#073d2e;
+  color:white;
+  padding:14px;
+  border-radius:13px;
+  margin-top:22px;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  padding:25px 10px;
+  color:#555;
+  font-size:14px;
+}
+
+@media(max-width:500px){
+  header h1{
+    font-size:23px;
+  }
+
+  .card{
+    padding:13px;
+  }
+
+  .day{
+    min-height:62px;
+  }
+
+  .day .greg{
+    font-size:15px;
+  }
+
+  .day .hijri{
+    font-size:10px;
+  }
+
+  .controls button{
+    padding:10px 13px;
+    font-size:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🇮🇳 Indian Travel Agency</h1>
+  <p>📅 Hijri & Gregorian Calendar</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<div class="today">
+  <h2>📌 Today</h2>
+  <p id="todayGregorian"></p>
+  <p id="todayHijri"></p>
+</div>
+
+<div class="controls">
+  <button onclick="changeMonth(-1)">‹ Previous</button>
+  <button onclick="goToday()">Today</button>
+  <button onclick="changeMonth(1)">Next ›</button>
+</div>
+
+<div class="month-title" id="monthTitle"></div>
+
+<div class="weekdays">
+  <div>Sun</div>
+  <div>Mon</div>
+  <div>Tue</div>
+  <div>Wed</div>
+  <div>Thu</div>
+  <div>Fri</div>
+  <div>Sat</div>
+</div>
+
+<div class="calendar" id="calendar"></div>
+
+<a class="back" href="./index.html">
+🏠 Back to Home
+</a>
+
+</div>
+</div>
+
+<div class="footer">
+  Indian Travel Agency<br>
+  Hajj & Umrah Services<br>
+  Shivamogga, Karnataka, India 🇮🇳
+</div>
+
+<script>
+
+let currentDate = new Date();
+
+const hijriFormatter = new Intl.DateTimeFormat(
+  "en-u-ca-islamic-umalqura",
+  {
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  }
+);
+
+const hijriShortFormatter = new Intl.DateTimeFormat(
+  "en-u-ca-islamic-umalqura",
+  {
+    day:"numeric",
+    month:"short",
+    year:"numeric"
+  }
+);
+
+function formatGregorian(date){
+  return date.toLocaleDateString("en-IN",{
+    weekday:"long",
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  });
+}
+
+function showToday(){
+
+  const today = new Date();
+
+  document.getElementById("todayGregorian").textContent =
+    "Gregorian: " + formatGregorian(today);
+
+  document.getElementById("todayHijri").textContent =
+    "Hijri: " + hijriFormatter.format(today);
+}
+
+function renderCalendar(){
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  const monthName = currentDate.toLocaleDateString("en-IN",{
+    month:"long",
+    year:"numeric"
+  });
+
+  document.getElementById("monthTitle").textContent =
+    "📅 " + monthName;
+
+  const calendar = document.getElementById("calendar");
+
+  calendar.innerHTML = "";
+
+  const firstDay = new Date(year,month,1).getDay();
+  const daysInMonth = new Date(year,month+1,0).getDate();
+
+  for(let i=0;i<firstDay;i++){
+    const empty = document.createElement("div");
+    calendar.appendChild(empty);
+  }
+
+  const today = new Date();
+
+  for(let day=1;day<=daysInMonth;day++){
+
+    const date = new Date(year,month,day);
+
+    const box = document.createElement("div");
+    box.className = "day";
+
+    if(
+      date.getFullYear() === today.getFullYear() &&
+      date.getMonth() === today.getMonth() &&
+      date.getDate() === today.getDate()
+    ){
+      box.classList.add("today-day");
+    }
+
+    const greg = document.createElement("div");
+    greg.className = "greg";
+    greg.textContent = day;
+
+    const hijri = document.createElement("div");
+    hijri.className = "hijri";
+    hijri.textContent = hijriShortFormatter.format(date);
+
+    box.appendChild(greg);
+    box.appendChild(hijri);
+
+    calendar.appendChild(box);
+  }
+}
+
+function changeMonth(amount){
+
+  currentDate.setMonth(
+    currentDate.getMonth() + amount
+  );
+
+  renderCalendar();
+}
+
+function goToday(){
+
+  currentDate = new Date();
+
+  renderCalendar();
+}
+
+showToday();
+renderCalendar();
+
+</script>
+
+</body>
+</html>
