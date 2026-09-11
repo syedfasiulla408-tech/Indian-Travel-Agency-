@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>حج اور عمرہ کا طریقہ | Indian Travel Agency</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:#f5f1e7;
+  color:#222;
+  font-family:Arial,"Noto Naskh Arabic",sans-serif;
+  line-height:1.8;
+}
+
+header{
+  background:#073d2e;
+  color:white;
+  text-align:center;
+  padding:25px 15px;
+}
+
+header h1{
+  margin:0;
+  font-size:28px;
+}
+
+header p{
+  margin:6px 0 0;
+  color:#f0c75e;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:25px auto;
+  padding:0 14px;
+}
+
+.card{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  margin-bottom:20px;
+  box-shadow:0 8px 25px rgba(0,0,0,.12);
+}
+
+h2{
+  color:#073d2e;
+  text-align:center;
+  margin-top:0;
+}
+
+.language-buttons{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  direction:ltr;
+  margin:20px 0;
+}
+
+.language-buttons button{
+  border:0;
+  padding:12px 20px;
+  border-radius:12px;
+  background:#073d2e;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+
+.language-buttons button.active{
+  background:#c79516;
+}
+
+.language{
+  display:none;
+}
+
+.language.active{
+  display:block;
+}
+
+.urdu{
+  direction:rtl;
+  text-align:right;
+}
+
+.english,
+.kannada{
+  direction:ltr;
+  text-align:left;
+}
+
+.info{
+  background:#faf8f1;
+  border-right:5px solid #c79516;
+  border-radius:12px;
+  padding:15px;
+  margin:15px 0;
+}
+
+.info h3{
+  color:#073d2e;
+  margin-top:0;
+}
+
+.pdf-button{
+  display:block;
+  text-align:center;
+  background:#073d2e;
+  color:white;
+  text-decoration:none;
+  padding:15px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.pdf-viewer{
+  width:100%;
+  height:700px;
+  border:2px solid #ddd;
+  border-radius:15px;
+  background:#eee;
+}
+
+.note{
+  background:#fff8dc;
+  padding:15px;
+  border-radius:12px;
+  margin-top:15px;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  background:#073d2e;
+  color:white;
+  text-decoration:none;
+  padding:15px;
+  border-radius:14px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+.footer{
+  text-align:center;
+  color:#555;
+  padding:25px 10px;
+  font-size:14px;
+}
+
+@media(max-width:600px){
+
+  header h1{
+    font-size:24px;
+  }
+
+  .card{
+    padding:15px;
+  }
+
+  .pdf-viewer{
+    height:600px;
+  }
+
+  .language-buttons button{
+    flex:1;
+    min-width:90px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🕋 حج اور عمرہ کا طریقہ</h1>
+<p>Indian Travel Agency</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📖 حج و عمرہ کی کتاب</h2>
+
+<div class="language-buttons">
+
+<button class="active"
+onclick="showLanguage('urdu',this)">
+🇵🇰 اردو
+</button>
+
+<button
+onclick="showLanguage('english',this)">
+🇬🇧 English
+</button>
+
+<button
+onclick="showLanguage('kannada',this)">
+🇮🇳 ಕನ್ನಡ
+</button>
+
+</div>
+
+
+<!-- اردو -->
+
+<div id="urdu" class="language active urdu">
+
+<h2>📖 اصل اردو کتاب</h2>
+
+<div class="info">
+
+<h3>🕋 حج اور عمرہ کا طریقہ</h3>
+
+<p>
+یہ آپ کی اصل اردو کتاب ہے۔ اصل کتاب کے صفحات
+اور ترتیب کو محفوظ رکھا گیا ہے۔
+</p>
+
+</div>
+
+<a
+class="pdf-button"
+href="./hajj-umrah-book-urdu.pdf"
+target="_blank">
+
+📖 اصل اردو کتاب کھولیں
+
+</a>
+
+<iframe
+class="pdf-viewer"
+src="./hajj-umrah-book-urdu.pdf">
+</iframe>
+
+</div>
+
+
+<!-- English -->
+
+<div id="english" class="language english">
+
+<h2>📖 Hajj & Umrah Guide</h2>
+
+<div class="info">
+
+<h3>🕋 Hajj and Umrah Guide</h3>
+
+<p>
+This section is prepared for English-speaking
+pilgrims.
+</p>
+
+<p>
+The original Urdu book is preserved separately
+in its original PDF format.
+</p>
+
+</div>
+
+<div class="note">
+
+<strong>English Translation</strong>
+
+<p>
+The complete English translation will be added
+page by page while preserving the meaning and
+order of the original Urdu book.
+</p>
+
+</div>
+
+</div>
+
+
+<!-- Kannada -->
+
+<div id="kannada" class="language kannada">
+
+<h2>📖 ಹಜ್ ಮತ್ತು ಉಮ್ರಾ ಮಾರ್ಗದರ್ಶಿ</h2>
+
+<div class="info">
+
+<h3>🕋 ಹಜ್ ಮತ್ತು ಉಮ್ರಾ</h3>
+
+<p>
+ಈ ವಿಭಾಗವು ಕನ್ನಡ ಭಾಷೆ ಮಾತನಾಡುವ ಯಾತ್ರಿಕರಿಗಾಗಿ
+ಸಿದ್ಧಪಡಿಸಲಾಗುತ್ತಿದೆ.
+</p>
+
+<p>
+ಮೂಲ ಉರ್ದು ಪುಸ್ತಕವನ್ನು ಅದರ ಮೂಲ PDF ರೂಪದಲ್ಲಿ
+ಸುರಕ್ಷಿತವಾಗಿ ಇರಿಸಲಾಗಿದೆ.
+</p>
+
+</div>
+
+<div class="note">
+
+<strong>ಕನ್ನಡ ಅನುವಾದ</strong>
+
+<p>
+ಪುಸ್ತಕದ ಸಂಪೂರ್ಣ ಕನ್ನಡ ಅನುವಾದವನ್ನು ಮೂಲ ಉರ್ದು
+ಪುಸ್ತಕದ ಅರ್ಥ ಮತ್ತು ಕ್ರಮವನ್ನು ಕಾಪಾಡಿಕೊಂಡು
+ಪುಟ ಪುಟವಾಗಿ ಇಲ್ಲಿ ಸೇರಿಸಲಾಗುತ್ತದೆ.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<a
+class="back"
+href="./index.html">
+
+🏠 ہوم پیج پر واپس جائیں
+
+</a>
+
+</div>
+
+
+<div class="footer">
+
+Indian Travel Agency<br>
+Hajj & Umrah Services<br>
+N.T. Road, Near Madni Masjid<br>
+Shivamogga, Karnataka, India 🇮🇳
+
+</div>
+
+
+<script>
+
+function showLanguage(language,button){
+
+  document
+  .querySelectorAll(".language")
+  .forEach(function(item){
+    item.classList.remove("active");
+  });
+
+  document
+  .querySelectorAll(".language-buttons button")
+  .forEach(function(item){
+    item.classList.remove("active");
+  });
+
+  document
+  .getElementById(language)
+  .classList.add("active");
+
+  button.classList.add("active");
+
+  if(language === "urdu"){
+    document.documentElement.lang="ur";
+    document.documentElement.dir="rtl";
+  }
+
+  else if(language === "english"){
+    document.documentElement.lang="en";
+    document.documentElement.dir="ltr";
+  }
+
+  else{
+    document.documentElement.lang="kn";
+    document.documentElement.dir="ltr";
+  }
+}
+
+</script>
+
+</body>
+</html>
