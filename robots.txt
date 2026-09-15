@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://syedfasiulla408-tech.github.io/Indian-Travel-Agency-/sitemap.xml
